@@ -1,12 +1,13 @@
-const getConnection = require('./../libs/postgres.js');
-const pool = require('../libs/postgres.pool.js');
+// const getConnection = require('./../libs/postgres.js');
+// const pool = require('../libs/postgres.pool.js');
+const sequelize = require('../libs/sequelize.js');
 
 class UserService {
   constructor() {
-    this.pool = pool;
-    this.pool.on('error', (err) => {
-      console.error(err);
-    });
+    // this.pool = pool;
+    // this.pool.on('error', (err) => {
+    //   console.error(err);
+    // });
   }
 
   async create(data) {
@@ -20,8 +21,10 @@ class UserService {
   // }
 
   async find() {
-    const rta = await this.pool.query('SELECT * FROM tasks');
-    return rta.rows;
+    // const rta = await this.pool.query('SELECT * FROM task');
+    // return rta.rows;
+    const [data] = await sequelize.query('SELECT * FROM task');
+    return data;
   }
 }
 
