@@ -1,6 +1,7 @@
 // const getConnection = require('./../libs/postgres.js');
 // const pool = require('../libs/postgres.pool.js');
-const sequelize = require('../libs/sequelize.js');
+// const sequelize = require('../libs/sequelize.js');
+const { models } = require('./../libs/sequelize');
 
 class UserService {
   constructor() {
@@ -23,8 +24,10 @@ class UserService {
   async find() {
     // const rta = await this.pool.query('SELECT * FROM task');
     // return rta.rows;
-    const [data] = await sequelize.query('SELECT * FROM task');
-    return data;
+    // const [data] = await sequelize.query('SELECT * FROM task');
+    // return data;
+    const rta = await models.User.findAll();
+    return rta;
   }
 }
 
