@@ -1,5 +1,6 @@
 const express = require('express');
 const routerAPI = require('./routes/index');
+const { ormErrorHandler } = require('./middlewares/error.handler');
 
 // Variables and constans
 const port = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ server.use(express.json());
 routerAPI(server);
 
 // General middlewares
+server.use(ormErrorHandler);
 
 // Listening server
 server.listen(port, () => {
