@@ -11,8 +11,11 @@ class UserService {
     // });
   }
 
+  // CREATE
   async create(data) {
-    return data;
+    // User ORM to create new user with sequelize
+    const newUser = models.User.create(data);
+    return newUser;
   }
 
   // async find() {
@@ -21,6 +24,7 @@ class UserService {
   //   return rta.rows;
   // }
 
+  // READ
   async find() {
     // const rta = await this.pool.query('SELECT * FROM task');
     // return rta.rows;
@@ -28,6 +32,29 @@ class UserService {
     // return data;
     const rta = await models.User.findAll();
     return rta;
+  }
+
+  async findOne(id) {
+    const user = await models.User.findByPk(id);
+    if (!user) {
+      // throw boom.notFound('User not found')
+      throw new Error('User not found');
+    }
+    return user;
+  }
+
+  // UPDATE
+  async update(id, data) {
+    const user = await this.findOne(id);
+    const updatedUser = await user.update(data);
+    return updatedUser;
+  }
+
+  // DELETE
+  async delete(id) {
+    const user = await this.findOne(id);
+    await user.destroy();
+    return { id };
   }
 }
 
