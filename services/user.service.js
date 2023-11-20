@@ -30,7 +30,9 @@ class UserService {
     // return rta.rows;
     // const [data] = await sequelize.query('SELECT * FROM task');
     // return data;
-    const rta = await models.User.findAll();
+    const rta = await models.User.findAll({
+      include: ['customer']
+    });
     return rta;
   }
 
