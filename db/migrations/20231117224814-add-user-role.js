@@ -8,7 +8,7 @@ module.exports = {
     await queryInterface.addColumn(USER_TABLE, 'role', UserSchema.role);
   },
 
-  async down(queryInterface, ) {
-    await queryInterface.removeColumn(USER_TABLE, 'role')
+  async down(queryInterface) {
+    await queryInterface.removeColumn(USER_TABLE, 'role');
   },
 };
