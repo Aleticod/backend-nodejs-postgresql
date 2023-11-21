@@ -1,15 +1,14 @@
 const express = require('express');
-const ProductService = require('./../services/product.service');
-
+const CategoryService = require('./../services/category.service');
 const router = express.Router();
-const service = new ProductService();
+const service = new CategoryService();
 
 // CREATE
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
-    const newProduct = await service.create(data)
-    res.json(newProduct);
+    const newCategory = await service.create(data);
+    res.json(newCategory);
   } catch (error) {
     next(error);
   }
@@ -18,8 +17,8 @@ router.post('/', async (req, res, next) => {
 // READ
 router.get('/', async (req, res, next) => {
   try {
-    const products = await service.find();
-    res.json(products);
+    const categories = await service.find();
+    res.json(categories);
   } catch (error) {
     next(error);
   }
@@ -28,8 +27,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const product = await service.findOne(id);
-    res.json(product);
+    const category = await service.findOne(id);
+    res.json(category);
   } catch (error) {
     next(error);
   }
@@ -40,19 +39,18 @@ router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = req.body;
-    const updatedProduct = await service.update(id, data);
-    res.json(updatedProduct);
+    const updatedCategory = await service.update(id, data);
+    res.json(updatedCategory);
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedId = await service.delete(id);
-    res.json(deletedId);
+    const idDeleted = await service.delete(id);
+    res.json(idDeleted);
   } catch (error) {
     next(error);
   }
