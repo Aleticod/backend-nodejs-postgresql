@@ -8,7 +8,7 @@ const service = new ProductService();
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
-    const newProduct = await service.create(data)
+    const newProduct = await service.create(data);
     res.json(newProduct);
   } catch (error) {
     next(error);
@@ -18,7 +18,7 @@ router.post('/', async (req, res, next) => {
 // READ
 router.get('/', async (req, res, next) => {
   try {
-    const products = await service.find();
+    const products = await service.find(req.query);
     res.json(products);
   } catch (error) {
     next(error);
