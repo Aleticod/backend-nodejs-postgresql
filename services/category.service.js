@@ -1,4 +1,3 @@
-const { Product } = require('../db/models/product.model');
 const { models } = require('./../libs/sequelize');
 
 class CategoryService {

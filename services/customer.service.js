@@ -19,7 +19,7 @@ class CustomerService {
   // READ
   async find() {
     const customers = await models.Customer.findAll({
-      include: ['user'],
+      include: ['user' /**'order'**/],
     });
     return customers;
   }
@@ -42,7 +42,7 @@ class CustomerService {
   // DELETE
   async delete(id) {
     const customer = await this.findOne(id);
-    await customer.delete();
+    await customer.destroy();
     return { id };
   }
 }
