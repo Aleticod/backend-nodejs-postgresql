@@ -27,10 +27,17 @@ class ProductService {
   }
 
   // READ
-  async find() {
-    const products = await models.Product.findAll({
-      include: ['category']
-    });
+  async find(query) {
+    const { limit, offset } = query;
+    const options = {
+      include: ['category'],
+    };
+    if (limit && offset) {
+      options.limit = parseInt(limit, 10);
+      options.offset = parseInt(offset, 10);
+    }
+    console.log(options);
+    const products = await models.Product.findAll(options);
     return products;
   }
 
@@ -52,9 +59,9 @@ class ProductService {
 
   // DELETE
   async delete(id) {
-    const product = await this.findOne(id)
-    await product.destroy(id)
-    return {id}
+    const product = await this.findOne(id);
+    await product.destroy(id);
+    return { id };
   }
 }
 
