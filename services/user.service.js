@@ -2,6 +2,7 @@
 // const pool = require('../libs/postgres.pool.js');
 // const sequelize = require('../libs/sequelize.js');
 const { models } = require('./../libs/sequelize');
+// const bCrypt = require('bcrypt');
 
 class UserService {
   constructor() {
@@ -14,7 +15,13 @@ class UserService {
   // CREATE
   async create(data) {
     // User ORM to create new user with sequelize
-    const newUser = models.User.create(data);
+    // const hash = await bCrypt.hash(data.password, 10);
+    // const newUser = await models.User.create({
+    //   ...data,
+    //   password: hash,
+    // });
+    const newUser = await models.User.create(data);
+    delete newUser.dataValues.password;
     return newUser;
   }
 
@@ -31,7 +38,7 @@ class UserService {
     // const [data] = await sequelize.query('SELECT * FROM task');
     // return data;
     const rta = await models.User.findAll({
-      include: ['customer']
+      include: ['customer'],
     });
     return rta;
   }
