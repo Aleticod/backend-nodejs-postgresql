@@ -1,6 +1,7 @@
 const express = require('express');
 const routerAPI = require('./routes/index');
 const { ormErrorHandler } = require('./middlewares/error.handler');
+const { checkApiKey } = require('./middlewares/auth.handler');
 
 // Variables and constans
 const port = process.env.PORT || 3000;
@@ -14,6 +15,9 @@ server.use(express.json());
 // CORS
 
 // Routers
+server.get('/nueva-ruta', checkApiKey, (req, res, next) => {
+  res.send('Hola, soy una nueva ruta');
+});
 routerAPI(server);
 
 // General middlewares
