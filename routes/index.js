@@ -4,9 +4,11 @@ const routerUsers = require('./users.router.js');
 const routerCustomer = require('./customers.router.js');
 const routerCategory = require('./category.router.js');
 const routerOrder = require('./order.router.js');
+const routerAuth = require('./auth.router.js');
 
 function routerAPI(server) {
   const router = express.Router();
+  router.use('/auth', routerAuth);
   router.use('/products', routerProducts);
   router.use('/users', routerUsers);
   router.use('/customers', routerCustomer);
