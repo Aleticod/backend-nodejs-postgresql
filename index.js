@@ -2,6 +2,7 @@ const express = require('express');
 const routerAPI = require('./routes/index');
 const { ormErrorHandler } = require('./middlewares/error.handler');
 const { checkApiKey } = require('./middlewares/auth.handler');
+const passport = require('passport');
 
 // Variables and constans
 const port = process.env.PORT || 3000;
@@ -13,6 +14,10 @@ const server = express();
 server.use(express.json());
 
 // CORS
+
+// AUTH
+server.use(passport.initialize());
+require('./utils/auth');
 
 // Routers
 server.get('/nueva-ruta', checkApiKey, (req, res, next) => {
